@@ -18,7 +18,7 @@ This Shell script help to developers to get fast
 
 ## Installation
 
-open [This](https://raw.githubusercontent.com/ashifsadiq/notes/main/Shell/run.sh) then ctrl+s then save into your working dir. (make sure extension on .sh)
+open [This](https://raw.githubusercontent.com/ashifsadiq/notes/main/Shell/run) then ctrl+s then save into your working dir. (make sure extension on .sh)
 
 
     
