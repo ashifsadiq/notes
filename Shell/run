@@ -1,0 +1,173 @@
+#!/bin/bash
+filename="run"
+install() {
+    LG='\033[1;32m'
+    NC='\033[0m'
+    PRC=`printf "%.0f" ${1}`
+    SHW=`printf "%3d\n" ${PRC}`
+    LNE=`printf "%.0f" $((${PRC}/2))`
+    LRR=`printf "%.0f" $((${PRC}/2-12))`; if [ ${LRR} -le 0 ]; then LRR=0; fi;
+    LYY=`printf "%.0f" $((${PRC}/2-24))`; if [ ${LYY} -le 0 ]; then LYY=0; fi;
+    LCC=`printf "%.0f" $((${PRC}/2-36))`; if [ ${LCC} -le 0 ]; then LCC=0; fi;
+    LGG=`printf "%.0f" $((${PRC}/2-48))`; if [ ${LGG} -le 0 ]; then LGG=0; fi;
+    LGG_=""
+    for ((i=1;i<=49;i++))
+    do
+        DOTS=""; 
+        for ((ii=${i};ii<49;ii++)); 
+            do DOTS="${DOTS}.";
+        done
+        if [ ${i} -le ${LNE} ]; 
+            then LGG_="${LGG_}#"; 
+            else LGG_="${LGG_}."; 
+        fi
+        echo -ne "${LG}${LGG_}${DOTS} ${SHW}%${NC}\r"
+        if [ ${LNE} -ge 38 ]; 
+            then sleep .05;
+        fi
+    done
+}
+case  $1  in
+    --help)
+        echo -e "----------------------------------------------------"
+        echo -e "INSTALL THIS PROGRAM ON THIS PC -> $filename install"
+        echo -e ""
+        echo -e "adb"
+        echo -e "-  devices-> $filename add"
+        echo -e "-  adb connect blueStacs-> $filename adcb"
+        echo -e "-  adb reverse port react-native-> $filename adr"
+        echo -e ""
+        echo -e "Git"
+        echo -e "- Push -> $filename gp"
+        echo -e "- Create new repo in terminal gcr"
+        echo -e "- Remove file/Dir in repo -> $filename grc"
+        echo -e "- Pull repo -> $filename gpl"
+        echo -e "- Push an existing repository -> $filename gper"
+        echo -e "- Show branches -> $filename gsb"
+        echo -e ""
+        echo -e "React Native"
+        echo -e "- React Native run andriod -> $filename rna"
+        echo -e "- start app -> $filename rns"
+    ;;
+    install)
+        if [ -e /c/Program\ Files/Git/usr/bin/run ]
+        then
+            echo "run is already installed in your Windows mechine"
+        elif [ -e /usr/bin/run ]
+        then
+            echo "run is already installed in your Linux mechine"
+        else
+            echo "\"$filename install-W\" for Windows"
+            echo "\"$filename install-L\" for Linux"
+        fi
+    ;;
+    install-W)
+        install 100
+        cp $filename /c/Program\ Files/Git/usr/bin/run
+        echo -e "\nInstalled sucessfully you can can just \"run --help\""
+    ;;
+    install-L)
+        install 100
+        cp $filename /usr/bin/
+        echo "installed sucessfully you can can just \"run --help\""
+    ;;
+    adcb)
+        abd connect 127.0.0.1:5555
+    ;;
+    adr)
+        adb reverse tcp:8081 tcp:8081
+    ;;
+    gcr)
+        adb devices
+    ;;
+    gcr)
+        read -p "repo Name : " repo_name
+        dir_name=`basename $(pwd)`
+        if [ "$repo_name" = "" ]; then
+        read -p "Repo name (hit enter to use '$dir_name')? : " repo_name
+        fi
+        if [ "$repo_name" = "" ]; then
+        repo_name=$dir_name
+        fi
+
+        username=`git config github.user`
+        if [ "$username" = "" ]; then
+        read -p "Can't find your github username, paste to set that, and once more : " username
+        git config github.user "$username"
+        invalid_credentials=1
+        fi
+
+        token=`git config github.token`
+        if [ "$token" = "" ]; then
+        read -p"Can't find your github token, paste to set that, and once more\nTo generate token visit: https://github.com/settings/tokens : " token
+        git config github.token "$token"
+        invalid_credentials=1
+        fi
+
+        if [ "$invalid_credentials" == "1" ]; then
+        return 1
+        fi
+
+        echo -n "Creating Github repository '$repo_name' ..."
+        curl -u "$username:$token" https://api.github.com/user/repos -d '{"name":"'$repo_name'"}' > /dev/null 2>&1
+        echo " done."
+
+        echo -n "Pushing local code to remote ..."
+        git remote add origin git@github.com:$username/$repo_name.git > /dev/null 2>&1
+        git push -u origin master > /dev/null 2>&1
+        echo -e "\n\n\n\n \"run --help\" to learn more"
+    ;;
+    gsb)
+        git remote show origin #| sed -n 4p 
+    ;;
+    gper)
+        read -p "Paste repo http Url including .git : " giturl
+        read -p "Commit message : " commitMsg
+        git init
+        git add .
+        git remote add origin $giturl
+        git branch -M main
+        git commit -m ""
+        git push -u origin main
+    ;;
+    gp)
+        git add .
+        read -p "commit message : " com_msg  
+        git commit -m " $com_msg "
+        read -p "do push [y/n] : " commit  
+        if [ $commit == "y" ]
+        then  
+            git push
+            echo -e "\n\n\nPushed sucessfully"  
+        fi
+    ;;
+    gpl)
+        git add .
+        read -p "commit message : " com_msg  
+        git commit -m " $com_msg "
+        read -p "origin : " origin
+        git pull origin $origin
+        echo -e "Git Pull sucess"
+    ;;
+    grc)
+        read -p "enter file name or dir : " removeing  
+        git rm --cached $removeing
+    ;;
+    rna)
+        while true
+        do
+            adb devices
+            npx react-native run-android
+        done
+    ;;
+    rns)
+        while true
+        do
+            adb devices
+            npx react-native start
+        done
+    ;;
+    *)
+        echo -e "\nPlease give any valid argument\nrefer $filename --help"
+    ;;              
+esac
