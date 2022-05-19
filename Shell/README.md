@@ -18,7 +18,7 @@ This Shell script help to developers to get fast
 
 ## Installation
 
-open [This](https://github.com/ashifsadiq/notes/releases/download/v1.0.0/run) then save.
+click [This](https://github.com/ashifsadiq/notes/releases/download/v1.0.0/run) then save.
 then `./run install`
 
 
