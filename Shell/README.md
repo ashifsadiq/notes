@@ -18,14 +18,15 @@ This Shell script help to developers to get fast
 
 ## Installation
 
-open [This](https://raw.githubusercontent.com/ashifsadiq/notes/main/Shell/run) then ctrl+s then save into your working dir. (make sure extension on .sh)
+open [This](https://github.com/ashifsadiq/notes/releases/download/v1.0.0/run) then save.
+then `./run install`
 
 
     
 ## Usage/Examples
 
 ```shell
-./run.sh --help
+./run --help
 ```
 
 ## 🔗 Links
