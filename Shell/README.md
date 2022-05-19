@@ -25,7 +25,7 @@ open [This](https://raw.githubusercontent.com/ashifsadiq/notes/main/Shell/run) t
 ## Usage/Examples
 
 ```shell
-./run.sh help
+./run.sh --help
 ```
 
 ## 🔗 Links
