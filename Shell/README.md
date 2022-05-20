@@ -19,7 +19,7 @@ This Shell script help to developers to get fast
 ## Installation
 
 click [This](https://github.com/ashifsadiq/notes/releases/download/v1.0.0/run) then save.
-then `./run install`
+then `./run install` on saved Directory
 
 
     
