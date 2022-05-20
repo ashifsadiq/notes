@@ -23,12 +23,18 @@ then `./run install` on saved Directory
 
 
     
-## Usage/Examples
+## Usage
 
 ```shell
-./run --help
+run --help
 ```
-
+## Examples
+```shell
+run gp
+```
+commit message : my commit message <br/>
+[<branch> xxxxx]  my commit message <br/>
+XX file changed, XX insertions(+), XX deletion(-) <br/>
+do push [y/n] : n <br/>
 ## 🔗 Links
 [![linkedin](https://img.shields.io/badge/linkedin-0A66C2?style=for-the-badge&logo=linkedin&logoColor=white)](https://www.linkedin.com/in/ashifsadiq)
-
