@@ -68,7 +68,7 @@ case  $1  in
     ;;
     install-L)
         install 100
-        cp $filename /usr/bin/
+        sudo cp $filename /usr/bin/
         echo "installed sucessfully you can can just \"run --help\""
     ;;
     adcb)
