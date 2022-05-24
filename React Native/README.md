@@ -152,5 +152,5 @@ abd connect 127.0.0.1:5555
 ## local.properties
 [Go back](#readme)
 ```
-touch /android/local.properties && printf  "sdk.dir = $HOME/Android/sdk" 
+touch android/local.properties && echo "sdk.dir = $HOME/Android/sdk" >> android/local.properties
 ```
